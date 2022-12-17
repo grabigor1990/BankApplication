@@ -2,6 +2,7 @@
 package com.telran.bank.service;
 
 import com.telran.bank.repository.StubRepository;
+import org.springframework.stereotype.Service;
 
 @Service
 public class StubService {
