@@ -3,6 +3,7 @@ package com.telran.bank.service;
 
 import com.telran.bank.repository.StubRepository;
 
+@Service
 public class StubService {
     private StubRepository stubRepository;
 
