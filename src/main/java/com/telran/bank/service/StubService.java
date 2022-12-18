@@ -18,9 +18,9 @@ public class StubService {
     public void withdrawAmount(int accountID,double amount){
         stubRepository.withdrawAmountByAccID(accountID,amount);
     }
-    public void teansferAmount(int accountID,int destAcctID,double amount){
-        stubRepository.withdrawAmountByAcctID(accountID, amount);
-        stubRepository.saveBalanceByAcctID(destAcctID, amount);
+    public void teansferAmount(int accountID,int destAccID,double amount){
+        stubRepository.withdrawAmountByAccID(accountID, amount);
+        stubRepository.saveBalanceByAcctID(destAccID, amount);
     }
 
 }
