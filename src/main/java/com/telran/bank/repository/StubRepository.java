@@ -2,20 +2,27 @@
 package com.telran.bank.repository;
 
 
+import com.telran.bank.entity.Accounts;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+
+
 @Repository
-public abstract class StubRepository implements JpaRepository {
-    public int findBalanceByAccID(int accountID) {
+public  interface StubRepository extends JpaRepository<Accounts,Long> {
+  @Query("")
+  static double findBalanceByAccID(int accountID) {
         return 0;
     }
 
-    public void saveBalanceByAccID(int accountId, double amount) {
+    static void saveBalanceByAccID(int accountId, double amount) {
+
     }
 
-    public void withdrawAmountByAccID(int accountID, double amount) {
-    }
-    public void saveBalanceByAcctID(int destAcctID, double amount) {
-    }
+    void withdrawAmountByAccID(int accountID, double amount);
+
+    void saveBalanceByAcctID(int destAccID, double amount);
+
+    Accounts saveAcount(Accounts account);
 }
