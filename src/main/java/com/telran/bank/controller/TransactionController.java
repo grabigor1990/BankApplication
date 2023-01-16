@@ -2,27 +2,39 @@ package com.telran.bank.controller;
 
 import com.telran.bank.entity.Transactions;
 import com.telran.bank.service.TransactionService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
-@Validated
+@RequestMapping("/transactions")
 public class TransactionController {
-    @Autowired
-    private TransactionService transService;
 
-    @Transactional
-    @PostMapping("/transaction")
-    public Transactions createTransaction(@RequestBody Transactions transactions){
-        return transService.saveTransaction(transactions);
+    private final TransactionService transactionsService;
+
+    public TransactionController(TransactionService transactionsService) {
+        this.transactionsService = transactionsService;
     }
 
+    @GetMapping
+    public List<Transactions> getAllTransactions() {
+        return transactionsService.getAllTransactions();
+    }
 
+    @PostMapping
+    public Transactions createTransaction(@RequestBody Transactions transaction) {
+        return transactionsService.createTransaction(transaction);
+    }
 
+    @PutMapping("/{id}")
+    public Transactions updateTransaction(@PathVariable Long id, @RequestBody Transactions transaction) {
+        return transactionsService.updateTransaction(id, transaction);
+    }
 
+    @DeleteMapping("/{id}")
+    public void deleteTransaction(@PathVariable Long id) {
+        transactionsService.deleteTransaction(id);
+    }
 }
+

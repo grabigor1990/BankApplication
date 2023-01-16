@@ -2,39 +2,54 @@
 package com.telran.bank.service;
 
 import com.telran.bank.entity.Accounts;
-import com.telran.bank.repository.StubRepository;
+import com.telran.bank.entity.Override;
+import com.telran.bank.exception.AccountNotFoundException;
+import com.telran.bank.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@Transactional
 public class AccountService {
     @Autowired
-    private StubRepository stubRepository;
+    private AccountRepository accountRepository;
 
-    public Accounts saveAccount(Accounts account){
-        return stubRepository.saveAcount(account);
+    public List<Accounts> getAllAccounts(@RequestParam(required = false) List<String> date,
+                                         @RequestParam(required = false) String city,
+                                         @RequestParam(required = false) String sort) {
+        return accountRepository.findAll();
     }
-    public double getBalance(int accountID){
-        return StubRepository.findBalanceByAccID(accountID);
+    @Override
+    public Accounts createAccount(Accounts accounts){
+        return accountRepository.save(accounts);
     }
-    public void depositAmount(int accountId,double amount){
-        StubRepository.saveBalanceByAccID(accountId,amount);
-    }
-    public void withdrawAmount(int accountID,double amount){
-        stubRepository.withdrawAmountByAccID(accountID,amount);
-    }
-    public void teansferAmount(int accountID,int destAccID,double amount){
-        stubRepository.withdrawAmountByAccID(accountID, amount);
-        stubRepository.saveBalanceByAcctID(destAccID, amount);
+    @Override
+    public Optional<Accounts> getAccount(long id) {
+        return accountRepository.findById(id);
     }
 
-    public List<Accounts> getAllAccounts() {
-        return null;
+    public double getBalance(int accountID) {
+        return 0;
     }
 
-    public Accounts getAccount(long id) {
-        return null;
+    public Accounts updateAccount(Long id, Accounts account) {
+        Accounts existingAccount = accountRepository.findById(id)
+                .orElseThrow(() -> new AccountNotFoundException("Account with id " + id + " not found"));
+        existingAccount.setEmail(account.getEmail());
+        existingAccount.setFirstName(account.getFirstName());
+        existingAccount.setLastName(account.getLastName());
+        existingAccount.setCountry(account.getCountry());
+        existingAccount.setCity(account.getCity());
+        existingAccount.setAmountOfMany(account.getAmountOfMany());
+        return accountRepository.save(existingAccount);
+    }
+
+    public void deleteAccount(Long id) {
+        accountRepository.deleteById(id);
     }
 }

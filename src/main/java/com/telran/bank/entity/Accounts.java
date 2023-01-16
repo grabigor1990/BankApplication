@@ -1,7 +1,6 @@
 package com.telran.bank.entity;
 
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -11,31 +10,24 @@ import java.util.Objects;
 @Entity
 @Table(name = "accounts")
 public class Accounts {
-    @javax.persistence.Id
-    @Column(name = "id", nullable = false)
     @CreatedDate
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Long id;
+    @Column(name = "email", nullable = false )
     private String email;
+    @Column(name = "created_account", nullable = false)
     private LocalDateTime createdAccount = LocalDateTime.now();
+    @Column(name = "first_name", nullable = false)
     private String firstName;
+    @Column(name = "last_name",nullable = false)
     private String lastName;
+    @Column(name = "country", nullable = false)
     private String country;
+    @Column(name = "city", nullable = false)
     private String city;
-    private BigDecimal amountOfMany = BigDecimal.valueOf(0);
-
-
-    public Accounts(Long id, String email, LocalDateTime createdAccount, String firstName, String lastName, String country, String city, BigDecimal amountOfMany) {
-        this.id = id;
-        this.email = email;
-        this.createdAccount = createdAccount;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.country = country;
-        this.city = city;
-        this.amountOfMany = amountOfMany;
-    }
+    @Column(name = "amount_of_many", nullable = false)
+    private BigDecimal amountOfMany;
 
     public Long getId() {
         return id;
