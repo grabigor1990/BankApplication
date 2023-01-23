@@ -40,7 +40,7 @@ public class TransactionControllerTest {
 
         mockMvc.perform(get("/transactions"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("[{"id":1,"name":"transaction1","amount":100},{"id":2,"name":"transaction2","amount":200}]"));
+                .andExpect(content().json("[{\"id\":1,\"name\":\"transaction1\",\"amount\":100},{\"id\":2,\"name\":\"transaction2\",\"amount\":200}]"));
 
         verify(transactionsService, times(1)).getAllTransactions();
     }
@@ -54,7 +54,7 @@ public class TransactionControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"id\":1,\"name\":\"transaction1\",\"amount\":100}"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{"id":1,"name":"transaction1","amount":100}"));
+                .andExpect(content().json("{\"id\":1,\"name\":\"transaction1\",\"amount\": 100}"));
 
         verify(transactionsService, times(1)).createTransaction(transaction);
     }
