@@ -24,6 +24,7 @@ Example of a Account data JSON object:
    "lastName": "Muller",
    "country": "Germany",
    "city": "Munich",
+   "amountOfMoney": 200,99,
    "transactions": [5, 8, 32, 6]
 }
 ```
