@@ -6,6 +6,7 @@ import com.telran.bank.entity.Override;
 import com.telran.bank.exception.AccountNotFoundException;
 import com.telran.bank.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,8 +34,8 @@ public class AccountService {
         return accountRepository.findById(id);
     }
 
-    public double getBalance(int accountID) {
-        return 0;
+    public ResponseEntity<Double> getBalance(double accountID) {
+        return null;
     }
 
     public Accounts updateAccount(Long id, Accounts account) {

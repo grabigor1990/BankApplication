@@ -35,6 +35,10 @@ public class Transactions {
 
     }
 
+    public Transactions() {
+
+    }
+
     public Long getTransactionID() {
         return transactionID;
     }

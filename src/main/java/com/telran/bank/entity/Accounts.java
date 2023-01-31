@@ -1,11 +1,14 @@
 package com.telran.bank.entity;
 
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.http.HttpStatus;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
+
 
 @Entity
 @Table(name = "accounts")
@@ -28,6 +31,18 @@ public class Accounts {
     private String city;
     @Column(name = "amount_of_many", nullable = false)
     private BigDecimal amountOfMany;
+
+    public Accounts(Long id, String email, LocalDateTime createdAccount, String firstName, String lastName, String country, String city, BigDecimal amountOfMany) {
+        this.id = id;
+        this.email = email;
+        this.createdAccount = createdAccount;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.country = country;
+        this.city = city;
+        this.amountOfMany = amountOfMany;
+    }
+    public Accounts(){}
 
     public Long getId() {
         return id;
