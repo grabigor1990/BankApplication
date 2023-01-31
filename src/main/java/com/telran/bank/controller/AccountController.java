@@ -3,7 +3,7 @@ package com.telran.bank.controller;
 
 import com.telran.bank.entity.Accounts;
 import com.telran.bank.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +13,11 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
 @Validated
 @RequestMapping("/accounts")
 public class AccountController {
-    @Autowired
+
     private AccountService accountService;
     @PostMapping
     public Accounts createAccount(@RequestBody Accounts account){// check if data valid.
