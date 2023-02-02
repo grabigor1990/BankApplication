@@ -33,8 +33,8 @@ public class TransactionControllerTest {
 
     @Test
     public void testGetAllTransactions() throws Exception {
-        Transactions transaction1 = new Transactions(1L, "transaction1", 100);
-        Transactions transaction2 = new Transactions(2L, "transaction2", 200);
+        Transactions transaction1 = new Transactions();
+        Transactions transaction2 = new Transactions();
         List<Transactions> transactions = Arrays.asList(transaction1, transaction2);
         when(transactionsService.getAllTransactions()).thenReturn(transactions);
 
@@ -47,7 +47,7 @@ public class TransactionControllerTest {
 
     @Test
     public void testCreateTransaction() throws Exception {
-        Transactions transaction = new Transactions(1L, "transaction1", 100);
+        Transactions transaction = new Transactions();
         when(transactionsService.createTransaction(transaction)).thenReturn(transaction);
 
         mockMvc.perform(post("/transactions")

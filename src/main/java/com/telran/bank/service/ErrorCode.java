@@ -1,2 +1,5 @@
-package com.telran.bank.service;public class ErrorCode {
+package com.telran.bank.service;
+
+public class ErrorCode {
+
 }

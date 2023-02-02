@@ -1,7 +1,7 @@
 
 package com.telran.bank.controller;
 
-import com.telran.bank.entity.Accounts;
+import com.telran.bank.entity.Account;
 import com.telran.bank.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,19 +20,19 @@ public class AccountController {
 
     private AccountService accountService;
     @PostMapping
-    public Accounts createAccount(@RequestBody Accounts account){// check if data valid.
+    public Account createAccount(@RequestBody Account account){// check if data valid.
         return accountService.createAccount(account);
     }
 
     @GetMapping
-    public List<Accounts> getAllAccounts(@RequestParam (required = false) List<String> date,
-                                         @RequestParam(required = false) String city,
-                                         @RequestParam(required = false) String country){
+    public List<Account> getAllAccounts(@RequestParam (required = false) List<String> date,
+                                        @RequestParam(required = false) String city,
+                                        @RequestParam(required = false) String country){
         return accountService.getAllAccounts(date,city,country);
     }
 
     @GetMapping("/{id}")
-    public Optional<Accounts> getAccount(@PathVariable long id){
+    public Optional<Account> getAccount(@PathVariable long id){
         return accountService.getAccount(id);
     }
     @GetMapping ("/accountID/balance")
@@ -41,7 +41,7 @@ public class AccountController {
     }
 
     @PutMapping("/{id}")
-    public Accounts updateAccount(@PathVariable Long id, @RequestBody Accounts account) {
+    public Account updateAccount(@PathVariable Long id, @RequestBody Account account) {
         return accountService.updateAccount(id, account);
     }
 

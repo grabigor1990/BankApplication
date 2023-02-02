@@ -1,8 +1,7 @@
 
 package com.telran.bank.service;
 
-import com.telran.bank.entity.Accounts;
-import com.telran.bank.entity.Override;
+import com.telran.bank.entity.Account;
 import com.telran.bank.exception.AccountNotFoundException;
 import com.telran.bank.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +19,17 @@ public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
-    public List<Accounts> getAllAccounts(@RequestParam(required = false) List<String> date,
-                                         @RequestParam(required = false) String city,
-                                         @RequestParam(required = false) String sort) {
+    public List<Account> getAllAccounts(@RequestParam(required = false) List<String> date,
+                                        @RequestParam(required = false) String city,
+                                        @RequestParam(required = false) String sort) {
         return accountRepository.findAll();
     }
-    @Override
-    public Accounts createAccount(Accounts accounts){
+
+    public Account createAccount(Account accounts){
         return accountRepository.save(accounts);
     }
-    @Override
-    public Optional<Accounts> getAccount(long id) {
+
+    public Optional<Account> getAccount(long id) {
         return accountRepository.findById(id);
     }
 
@@ -38,8 +37,8 @@ public class AccountService {
         return null;
     }
 
-    public Accounts updateAccount(Long id, Accounts account) {
-        Accounts existingAccount = accountRepository.findById(id)
+    public Account updateAccount(Long id, Account account) {
+        Account existingAccount = accountRepository.findById(id)
                 .orElseThrow(() -> new AccountNotFoundException("Account with id " + id + " not found"));
         existingAccount.setEmail(account.getEmail());
         existingAccount.setFirstName(account.getFirstName());
