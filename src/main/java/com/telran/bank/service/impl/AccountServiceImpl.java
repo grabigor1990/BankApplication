@@ -1,32 +1,40 @@
 
 package com.telran.bank.service;
 
+import com.telran.bank.dto.AccountDTO;
 import com.telran.bank.entity.Account;
-import com.telran.bank.exception.AccountNotFoundException;
+import com.telran.bank.mapper.AccountMapper;
+import com.telran.bank.service.exception.AccountNotFoundException;
 import com.telran.bank.repository.AccountRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
-public class AccountService {
-    @Autowired
-    private AccountRepository accountRepository;
+@RequiredArgsConstructor
 
-    public List<Account> getAllAccounts(@RequestParam(required = false) List<String> date,
-                                        @RequestParam(required = false) String city,
+public class AccountServiceImpl implements AccountSrvice {
+
+
+    private final AccountRepository accountRepository;
+    private final AccountMapper accountMapper;
+    private final TransactionService transactionService;
+
+
+
+    public List<AccountDTO> getAllAccount(@RequestParam(required = false) String date,
+                                        @RequestParam(required = false) List<String> city,
                                         @RequestParam(required = false) String sort) {
-        return accountRepository.findAll();
+        return accountMapper.toDtoList(accountRepository.findAll(date,city,sort));   //accountRepository.findAll();
     }
 
-    public Account createAccount(Account accounts){
-        return accountRepository.save(accounts);
+    public Account saveAccount(Account accounts){
+       return accountRepository.save(accounts);
+
     }
 
     public Optional<Account> getAccount(long id) {
@@ -51,5 +59,12 @@ public class AccountService {
 
     public void deleteAccount(Long id) {
         accountRepository.deleteById(id);
+    }
+
+
+
+    @Override
+    public AccountDTO getAccount(Long id) {
+        return null;
     }
 }
