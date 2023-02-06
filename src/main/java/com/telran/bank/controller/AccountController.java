@@ -1,51 +1,51 @@
 
 package com.telran.bank.controller;
 
+import com.telran.bank.dto.AccountDTO;
 import com.telran.bank.entity.Account;
-import com.telran.bank.service.AccountService;
+import com.telran.bank.service.AccountSrvice;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequiredArgsConstructor
-@Validated
+
 @RequestMapping("/accounts")
 public class AccountController {
 
-    private AccountService accountService;
+    private final AccountSrvice accountService;
+
     @PostMapping
-    public Account createAccount(@RequestBody Account account){// check if data valid.
-        return accountService.createAccount(account);
+    @ResponseStatus(HttpStatus.CREATED)
+    public AccountDTO createAccount(@RequestBody AccountDTO accountDTO) {
+        return accountService.createAccount(accountDTO);
     }
 
     @GetMapping
-    public List<Account> getAllAccounts(@RequestParam (required = false) List<String> date,
-                                        @RequestParam(required = false) String city,
-                                        @RequestParam(required = false) String country){
-        return accountService.getAllAccounts(date,city,country);
+    public List<AccountDTO> getAllAccounts(@RequestParam (value = "date", required = false) String date,
+                                        @RequestParam(value = "city", required = false) List <String> city,
+                                        @RequestParam(value = "sort", required = false) String sort){
+        return accountService.getAllAccount(date,city,sort);
     }
 
     @GetMapping("/{id}")
-    public Optional<Account> getAccount(@PathVariable long id){
+    public AccountDTO getAccount(@PathVariable Long id){
         return accountService.getAccount(id);
     }
-    @GetMapping ("/accountID/balance")
-    public ResponseEntity<Double> getBalance(@PathVariable double accountID){
-        return accountService.getBalance(accountID);
-    }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Account updateAccount(@PathVariable Long id, @RequestBody Account account) {
         return accountService.updateAccount(id, account);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public void deleteAccount(@PathVariable Long id) {
         accountService.deleteAccount(id);
     }

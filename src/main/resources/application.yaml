@@ -3,9 +3,9 @@ spring:
     banner-mode: off
 
   datasource:
-    url: jdbc:postgresql://10.10.14.13:5432/BankApplication-dev
-    username: bankapplication
-    password: bankapplication
+    url: ${datasource.url}
+    username: ${datasource.username}
+    password: ${datasource.password}
 
   jpa:
     show-sql: false

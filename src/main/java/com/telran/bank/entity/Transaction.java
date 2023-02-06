@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,7 +15,7 @@ import java.util.Objects;
 @Entity
 @ToString
 @Table(name = "transactions")
-public class Transactions {
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -32,7 +31,7 @@ public class Transactions {
     private TransactionType type;
 
     @Column(name = "account_from")
-    private String accoutFrom;
+    private String accountFrom;
 
     @Column(name = "account_to")
     private String accountTo;

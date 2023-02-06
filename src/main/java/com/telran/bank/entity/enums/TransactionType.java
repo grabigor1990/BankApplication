@@ -1,6 +1,6 @@
 package com.telran.bank.entity.enums;
 
-public enum TransacrionType {
+public enum TransactionType {
     WITHDRAW,
     TRANSFER,
     DEPOSIT

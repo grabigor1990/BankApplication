@@ -1,17 +1,21 @@
 package com.telran.bank.dto;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
+
+import lombok.Value;
 
 public class TransactionDTO {
+
+    @Value
     public class TransactionsDTO {
-        private Long transactionID;
-        private LocalDateTime dateTime;
-        private String type;
-        private String accoutFrom;
-        private String accountTo;
-        private BigDecimal amount;
-        private List<TransactionsDTO> transactionsList;
+
+        String dateTime;
+
+        String type;
+
+        String accountFrom;
+
+        String accountTo;
+
+        String amount;
     }
 }

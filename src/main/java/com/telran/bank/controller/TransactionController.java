@@ -1,39 +1,43 @@
 package com.telran.bank.controller;
 
-import com.telran.bank.entity.Transactions;
+import com.telran.bank.dto.TransactionDTO;
+import com.telran.bank.entity.Transaction;
 import com.telran.bank.service.TransactionService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/transactions")
 public class TransactionController {
 
     private final TransactionService transactionsService;
 
-    public TransactionController(TransactionService transactionsService) {
-        this.transactionsService = transactionsService;
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public TransactionDTO createTransaction(@RequestBody TransactionDTO transactionDTO) {
+        return transactionsService.createTransaction(transactionDTO);
     }
 
     @GetMapping
-    public List<Transactions> getAllTransactions() {
-        return transactionsService.getAllTransactions();
+    public TransactionDTO getTransaction(@PathVariable Long id) {
+        return transactionsService.getTransaction(id);
     }
 
-    @PostMapping
-    public Transactions createTransaction(@RequestBody Transactions transaction) {
-        return transactionsService.createTransaction(transaction);
-    }
-
-    @PutMapping("/{id}")
-    public Transactions updateTransaction(@PathVariable Long id, @RequestBody Transactions transaction) {
-        return transactionsService.updateTransaction(id, transaction);
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<TransactionDTO> getAllTransactions(@RequestParam(required = false) String date,
+                                                   @RequestParam(required = false) String type,
+                                                   @RequestParam(required = false) String sort) {
+        return transactionsService.getAllTransaction(date, type, sort);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTransaction(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteTransaction(@PathVariable Long id){
         transactionsService.deleteTransaction(id);
     }
 }

@@ -1,35 +1,38 @@
-package com.telran.bank.service;
+package com.telran.bank.service.impl;
 
+import com.telran.bank.dto.TransactionDTO;
 import com.telran.bank.entity.Transaction;
-import com.telran.bank.service.exception.TransactionNotFoundException;
+import com.telran.bank.mapper.TransactionMapper;
 import com.telran.bank.repository.TransactionRepository;
-import lombok.AllArgsConstructor;
+import com.telran.bank.service.TransactionService;
+import com.telran.bank.service.exception.TransactionNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
-public class TransactionService {
+@RequiredArgsConstructor
+public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionsRepository;
 
-    public List<Transaction> getAllTransactions() {
-        return transactionsRepository.findAll();
+    private final TransactionMapper transactionMapper;
+
+    public TransactionDTO getTransaction(Long id) {
+        Transaction transaction = transactionsRepository.findById(id)
+                .orElseThrow(() -> new TransactionNotFoundException("Transaction not found"));
+        return transactionMapper.transactionToDto(transaction);
     }
 
-    public Transaction createTransaction(Transaction transaction) {
-        return transactionsRepository.save(transaction);
+    public List<TransactionDTO> getAllTransaction(String date, String city, String sort) {
+        return transactionMapper.toDtoList(transactionsRepository.findAll(date, city, sort));
     }
 
-    public Transaction updateTransaction(Long id, Transaction updatedTransaction) {
-        Transaction transaction = transactionsRepository.findById(id).orElseThrow(() -> new TransactionNotFoundException("Transaction not found with id " + id));
-        transaction.setType(updatedTransaction.getType());
-        transaction.setAccoutFrom(updatedTransaction.getAccoutFrom());
-        transaction.setAccountTo(updatedTransaction.getAccountTo());
-        transaction.setAmount(updatedTransaction.getAmount());
-        transaction.setTransactionID(updatedTransaction.getTransactionsList());
-        return transactionsRepository.save(transaction);
+    public TransactionDTO createTransaction(TransactionDTO transactionDTO) {
+        Transaction transaction = transactionMapper.dtoToTransaction(transactionDTO);
+            transactionsRepository.save(transaction);
+            return transactionMapper.transactionToDto(transaction);
     }
 
     public void deleteTransaction(Long id) {

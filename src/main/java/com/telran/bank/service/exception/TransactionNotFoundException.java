@@ -1,4 +1,4 @@
-package com.telran.bank.exception;
+package com.telran.bank.service.exception;
 
 
 import org.springframework.http.HttpStatus;
