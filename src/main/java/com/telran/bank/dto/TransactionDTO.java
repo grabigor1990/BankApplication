@@ -3,6 +3,7 @@ package com.telran.bank.dto;
 
 import lombok.Value;
 
+import java.util.List;
 import java.util.UUID;
 
 public class TransactionDTO {
@@ -20,5 +21,7 @@ public class TransactionDTO {
         String accountTo;
 
         String amount;
+
+        List<String> account;
     }
 }

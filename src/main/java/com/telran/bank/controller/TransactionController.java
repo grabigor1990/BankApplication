@@ -1,7 +1,6 @@
 package com.telran.bank.controller;
 
 import com.telran.bank.dto.TransactionDTO;
-import com.telran.bank.entity.Transaction;
 import com.telran.bank.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -35,4 +34,3 @@ public class TransactionController {
         return transactionsService.getAllTransaction(date, type, sort);
     }
 }
-
