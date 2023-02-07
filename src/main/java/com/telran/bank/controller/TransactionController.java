@@ -34,11 +34,5 @@ public class TransactionController {
                                                    @RequestParam(required = false) String sort) {
         return transactionsService.getAllTransaction(date, type, sort);
     }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteTransaction(@PathVariable Long id){
-        transactionsService.deleteTransaction(id);
-    }
 }
 

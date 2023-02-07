@@ -34,9 +34,5 @@ public class TransactionServiceImpl implements TransactionService {
             transactionsRepository.save(transaction);
             return transactionMapper.transactionToDto(transaction);
     }
-
-    public void deleteTransaction(Long id) {
-        transactionsRepository.deleteById(id);
-    }
 }
 

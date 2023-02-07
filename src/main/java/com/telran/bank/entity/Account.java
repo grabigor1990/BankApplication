@@ -1,12 +1,14 @@
 package com.telran.bank.entity;
 
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 
 @NoArgsConstructor
@@ -18,11 +20,12 @@ import java.util.Objects;
 public class Account {
 
     @CreatedDate
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "com.telran.bank.generator.UuidTimeSequenceGenerator")
     @Id
 
     @Column(name = "id")
-    private Long id;
+    private UUID id;
 
     @Column(name = "email", nullable = false )
     private String email;

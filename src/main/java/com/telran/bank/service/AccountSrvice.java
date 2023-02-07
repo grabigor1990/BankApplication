@@ -3,6 +3,7 @@ package com.telran.bank.service;
 import com.telran.bank.dto.AccountDTO;
 import com.telran.bank.entity.Account;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface AccountSrvice {

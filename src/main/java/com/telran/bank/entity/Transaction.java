@@ -2,11 +2,13 @@ package com.telran.bank.entity;
 
 import com.telran.bank.entity.enums.TransactionType;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,11 +19,12 @@ import java.util.List;
 @Table(name = "transactions")
 public class Transaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "com.telran.bank.generator.UuidTimeSequenceGenerator")
 
 
-    @Column(name = "transactionID")
-    private Long transactionID;
+    @Column(name = "id")
+    private UUID id;
 
     @Column(name = "date_time")
     private LocalDateTime dateTime = LocalDateTime.now();

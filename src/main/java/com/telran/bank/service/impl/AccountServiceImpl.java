@@ -3,13 +3,16 @@ package com.telran.bank.service.impl;
 
 import com.telran.bank.dto.AccountDTO;
 import com.telran.bank.entity.Account;
+import com.telran.bank.entity.Transaction;
 import com.telran.bank.mapper.AccountMapper;
+import com.telran.bank.repository.TransactionRepository;
 import com.telran.bank.service.AccountSrvice;
 import com.telran.bank.service.exception.AccountNotFoundException;
 import com.telran.bank.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -18,6 +21,7 @@ import java.util.List;
 
 public class AccountServiceImpl implements AccountSrvice {
 
+    private final TransactionRepository transactionRepository;
     private final AccountRepository accountRepository;
     private final AccountMapper accountMapper;
 
