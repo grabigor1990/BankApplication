@@ -6,3 +6,4 @@ app:
   version: 0.0.1- SNAPSHOT
   server:
     stage: local
+    url: http://localhost:8080

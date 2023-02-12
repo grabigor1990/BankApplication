@@ -5,8 +5,8 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                             https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet id="create sequence for UUID generator" author="i.grab">
-        <createSequence sequenceName="seq_for_uuid_generator"
+    <changeSet id="create sequence for id generator" author="i.grab">
+        <createSequence sequenceName="seq_for_id_generator"
                         schemaName="public"
                         cycle="true"/>
     </changeSet>

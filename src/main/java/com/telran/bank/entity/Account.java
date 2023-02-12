@@ -18,9 +18,8 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "accounts")
+@Builder
 public class Account {
-
-    @CreatedDate
 
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "com.telran.bank.generator.UuidTimeSequenceGenerator")
@@ -32,6 +31,7 @@ public class Account {
     @Column(name = "email")
     private String email;
 
+    @CreatedDate
     @Column(name = "created_account")
     private LocalDateTime createdAccount = LocalDateTime.now();
 
@@ -58,8 +58,7 @@ public class Account {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Account)) return false;
-        Account account = (Account) o;
+        if (!(o instanceof Account account)) return false;
         return id.equals(account.id) && email.equals(account.email);
     }
 

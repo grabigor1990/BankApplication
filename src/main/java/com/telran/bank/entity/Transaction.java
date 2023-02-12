@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -15,7 +16,6 @@ import java.util.UUID;
 @Setter
 @Getter
 @Entity
-@ToString
 @Table(name = "transactions")
 public class Transaction {
     @Id
@@ -46,4 +46,22 @@ public class Transaction {
     @ManyToMany(mappedBy = "id", cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private List<Account> accounts;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Transaction that)) return false;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(dateTime, that.dateTime) &&
+                type == that.type &&
+                Objects.equals(accountFrom, that.accountFrom) &&
+                Objects.equals(accountTo, that.accountTo) &&
+                Objects.equals(amount, that.amount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, dateTime, type, accountFrom, accountTo, amount);
+    }
 }
+

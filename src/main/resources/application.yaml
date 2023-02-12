@@ -14,6 +14,7 @@ spring:
   liquibase:
     change-log: db.changelog/changelog-master.xml
     enabled: true
+    contexts: dev
 
 app:
   description: ${description}
