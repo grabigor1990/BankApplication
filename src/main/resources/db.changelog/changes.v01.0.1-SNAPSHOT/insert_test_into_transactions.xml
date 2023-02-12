@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    
+    <changeSet id="insert test into transaction 1" author="i.grab">
+        <insert tableName="transactions">
+            <column name="id" value="12345678-7777-7777-1234-1234567890ab"/>
+            <column name="date_time" value="2023-02-01 10:10:10"/>
+            <column name="type" value="WITHDRAW"/>
+            <column name="account_from" value="account1"/>
+            <column name="account_to" value="account2"/>
+            <column name="amount" value="1500"/>
+            <column name="account_id" value="a60266cb-1814-4285-83ef-bb55a4849af5"/>
+        </insert>
+    </changeSet>
+    <changeSet id="insert test into transaction 2" author="i.grab">
+        <insert tableName="transactions">
+            <column name="id" value="523e4567-e89b-12d3-a456-426655440000"/>
+            <column name="date_time" value="2023-02-02 11:11:11"/>
+            <column name="type" value="TRANSFER"/>
+            <column name="account_from" value="account2"/>
+            <column name="account_to" value="account3"/>
+            <column name="amount" value="800"/>
+            <column name="account_id" value="123e4567-e89b-12d3-a456-426655440000"/>
+        </insert>
+    </changeSet>
+    <changeSet id="insert test into transaction 3" author="i.grab">
+        <insert tableName="transactions">
+            <column name="id" value="aaaabbbb-0000-9999-8888-777766665555"/>
+            <column name="date_time" value="2023-03-03 12:12:12"/>
+            <column name="type" value="DEPOSIT"/>
+            <column name="account_from" value="account3"/>
+            <column name="account_to" value="account1"/>
+            <column name="amount" value="400"/>
+            <column name="account_id" value="44446543-6233-1263-9575-abfcd45d5b65"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

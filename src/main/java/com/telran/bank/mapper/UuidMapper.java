@@ -9,8 +9,4 @@ public interface UuidMapper {
     default String toString(UUID uuid) {
         return uuid.toString();
     }
-
-    default UUID fromString(String uuid) {
-        return UUID.fromString(uuid);
-    }
 }

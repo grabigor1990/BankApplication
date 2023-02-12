@@ -1,9 +1,13 @@
 package com.telran.bank.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.telran.bank.entity.Transaction;
 import lombok.Value;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
+
 
 @Value
 public class AccountDTO {
@@ -12,6 +16,7 @@ public class AccountDTO {
 
     String email;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss")
     String createdAccount;
 
     String firstName;
@@ -22,7 +27,7 @@ public class AccountDTO {
 
     String city;
 
-    String amountOfMany;
+    BigDecimal amountOfMany;
 
-    List<String> transactions;
+    List<Transaction> transactions;
 }

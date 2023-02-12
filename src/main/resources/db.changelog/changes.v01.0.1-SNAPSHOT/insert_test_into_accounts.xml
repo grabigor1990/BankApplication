@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="insert test into accounts 1" author="i.grab">
+        <insert tableName="accounts">
+            <column name="id" value="44446543-6233-1263-9575-abfcd45d5b65"/>
+            <column name="created_account" value="2023-01-01 10:00:11"/>
+            <column name="email" value="smith@gmail.com"/>
+            <column name="first_name" value="John"/>
+            <column name="last_name" value="Smith"/>
+            <column name="city" value="Boston"/>
+            <column name="country" value="USA"/>
+            <column name="amount_of_many" value="2500"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert test data into accounts 2" author="i.grab">
+        <insert tableName="accounts">
+            <column name="id" value="a60266cb-1814-4285-83ef-bb55a4849af5"/>
+            <column name="created_account" value="2023-01-02 11:00:12"/>
+            <column name="email" value="dou@gmail.com"/>
+            <column name="first_name" value="Jan"/>
+            <column name="last_name" value="Dou"/>
+            <column name="city" value="Berlin"/>
+            <column name="country" value="Germany"/>
+            <column name="amount_of_many" value="17000"/>
+        </insert>
+
+    </changeSet>
+    <changeSet id="insert test data into accounts 3" author="i.grab">
+        <insert tableName="accounts">
+            <column name="id" value="123e4567-e89b-12d3-a456-426655440000"/>
+            <column name="created_account" value="2023-01-03 12:00:13"/>
+            <column name="email" value="sohn@gmail.com"/>
+            <column name="first_name" value="Andreas"/>
+            <column name="last_name" value="Sohn"/>
+            <column name="city" value="Dortmund"/>
+            <column name="country" value="Germany"/>
+            <column name="amount_of_many" value="7200"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

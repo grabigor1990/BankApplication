@@ -3,6 +3,7 @@ package com.telran.bank.entity;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ import java.util.UUID;
 public class Account {
 
     @CreatedDate
+
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "com.telran.bank.generator.UuidTimeSequenceGenerator")
     @Id
@@ -27,30 +29,31 @@ public class Account {
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "email", nullable = false )
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "created_account", nullable = false)
+    @Column(name = "created_account")
     private LocalDateTime createdAccount = LocalDateTime.now();
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name",nullable = false)
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "country", nullable = false)
+    @Column(name = "country")
     private String country;
 
-    @Column(name = "city", nullable = false)
+    @Column(name = "city")
     private String city;
 
-    @Column(name = "amount_of_many", nullable = false)
+    @Column(name = "amount_of_many")
     private BigDecimal amountOfMany;
 
-    @ManyToMany(mappedBy = "account",cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    private List<Transaction> transaction;
+    @ManyToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    @JoinColumn(name = "transaction_id", referencedColumnName = "id")
+    private List<Transaction> transactions;
+
 
     @Override
     public boolean equals(Object o) {

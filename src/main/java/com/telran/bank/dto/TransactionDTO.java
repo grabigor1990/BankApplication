@@ -1,27 +1,21 @@
 package com.telran.bank.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Value;
 
-import java.util.List;
-import java.util.UUID;
-
+@Value
 public class TransactionDTO {
 
-    @Value
-    public class TransactionsDTO {
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss")
+    String dateTime;
 
-        UUID id;
-        String dateTime;
+    String type;
 
-        String type;
+    String accountFrom;
 
-        String accountFrom;
+    String accountTo;
 
-        String accountTo;
-
-        String amount;
-
-        List<String> account;
-    }
+    String amount;
 }
+

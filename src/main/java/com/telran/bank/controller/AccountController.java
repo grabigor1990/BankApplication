@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,26 +26,26 @@ public class AccountController {
     }
 
     @GetMapping
-    public List<AccountDTO> getAllAccounts(@RequestParam (value = "date", required = false) String date,
-                                        @RequestParam(value = "city", required = false) List <String> city,
-                                        @RequestParam(value = "sort", required = false) String sort){
-        return accountService.getAllAccount(date,city,sort);
+    public List<AccountDTO> getAllAccounts(@RequestParam(value = "date", required = false) String date,
+                                           @RequestParam(value = "city", required = false) List<String> city,
+                                           @RequestParam(value = "sort", required = false) String sort) {
+        return accountService.getAllAccount(date, city, sort);
     }
 
     @GetMapping("/{id}")
-    public AccountDTO getAccount(@PathVariable Long id){
+    public AccountDTO getAccount(@PathVariable UUID id) {
         return accountService.getAccount(id);
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Account updateAccount(@PathVariable Long id, @RequestBody Account account) {
-        return accountService.updateAccount(id, account);
+    public Account updateAccount(@PathVariable UUID id, @RequestBody AccountDTO accountDTO) {
+        return accountService.updateAccount(id, accountDTO);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteAccount(@PathVariable Long id) {
+    public void deleteAccount(@PathVariable UUID id) {
         accountService.deleteAccount(id);
     }
 }

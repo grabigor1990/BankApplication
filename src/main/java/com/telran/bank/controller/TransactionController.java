@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -22,7 +23,7 @@ public class TransactionController {
     }
 
     @GetMapping
-    public TransactionDTO getTransaction(@PathVariable Long id) {
+    public TransactionDTO getTransaction(UUID id) {
         return transactionsService.getTransaction(id);
     }
 

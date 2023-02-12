@@ -3,17 +3,17 @@ spring:
     banner-mode: off
 
   datasource:
-    url: ${datasource.url}
+    url: jdbc:postgresql://localhost:5432/postgres
     username: ${datasource.username}
     password: ${datasource.password}
-
   jpa:
-    show-sql: false
+    show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
 
   liquibase:
-    change-log: classpath:/db/changelog/changelog-master.xml
+    change-log: db.changelog/changelog-master.xml
+    enabled: true
 
 app:
   description: ${description}

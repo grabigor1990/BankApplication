@@ -9,10 +9,10 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface AccountMapper {
 
-     AccountDTO accountToDto(Account account);
+    AccountDTO accountToDto(Account account);
 
-     Account dtoToAccount (AccountDTO accountDTO);
+    Account dtoToAccount(AccountDTO accountDTO);
 
-    List<AccountDTO> toDtoList (List<Account> accounts);
+    List<AccountDTO> toDtoList(List<Account> accounts);
 
 }

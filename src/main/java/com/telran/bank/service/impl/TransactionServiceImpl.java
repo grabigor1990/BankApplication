@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
+
 
 @Service
 @RequiredArgsConstructor
@@ -19,8 +21,8 @@ public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionMapper transactionMapper;
 
-    public TransactionDTO getTransaction(Long id) {
-        Transaction transaction = transactionsRepository.findById(id)
+    public TransactionDTO getTransaction(UUID id) {
+        Transaction transaction = (Transaction) transactionsRepository.findById(id)
                 .orElseThrow(() -> new TransactionNotFoundException("Transaction not found"));
         return transactionMapper.transactionToDto(transaction);
     }
@@ -31,8 +33,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     public TransactionDTO createTransaction(TransactionDTO transactionDTO) {
         Transaction transaction = transactionMapper.dtoToTransaction(transactionDTO);
-            transactionsRepository.save(transaction);
-            return transactionMapper.transactionToDto(transaction);
+        transactionsRepository.save(transaction);
+        return transactionMapper.transactionToDto(transaction);
     }
 }
-

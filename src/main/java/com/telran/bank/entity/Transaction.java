@@ -26,6 +26,7 @@ public class Transaction {
     @Column(name = "id")
     private UUID id;
 
+
     @Column(name = "date_time")
     private LocalDateTime dateTime = LocalDateTime.now();
 
@@ -42,7 +43,7 @@ public class Transaction {
     @Column(name = "amount")
     private BigDecimal amount;
 
-    @ManyToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    private List<Account>account;
+    @ManyToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    private List<Account> accounts;
 }
