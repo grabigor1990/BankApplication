@@ -22,8 +22,8 @@ public class TransactionController {
         return transactionsService.createTransaction(transactionDTO);
     }
 
-    @GetMapping
-    public TransactionDTO getTransaction(UUID id) {
+    @GetMapping("/{id}")
+    public TransactionDTO getTransaction(@PathVariable UUID id) {
         return transactionsService.getTransaction(id);
     }
 

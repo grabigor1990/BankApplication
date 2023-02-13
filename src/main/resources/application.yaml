@@ -9,11 +9,11 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
 
   liquibase:
-    change-log: db.changelog/changelog-master.xml
-    enabled: true
+    change-log: classpath:/db/changelog/changelog-master.xml
+    enabled: false
     contexts: dev
 
 app:

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                            https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog">
+
+
     <changeSet id="insert test into transaction 1" author="i.grab">
         <insert tableName="transactions">
             <column name="id" value="12345678-7777-7777-1234-1234567890ab"/>
@@ -12,7 +13,7 @@
             <column name="account_from" value="account1"/>
             <column name="account_to" value="account2"/>
             <column name="amount" value="1500"/>
-            <column name="account_id" value="a60266cb-1814-4285-83ef-bb55a4849af5"/>
+            <column name="account_id" value="3"/>
         </insert>
     </changeSet>
     <changeSet id="insert test into transaction 2" author="i.grab">
@@ -23,7 +24,7 @@
             <column name="account_from" value="account2"/>
             <column name="account_to" value="account3"/>
             <column name="amount" value="800"/>
-            <column name="account_id" value="123e4567-e89b-12d3-a456-426655440000"/>
+            <column name="account_id" value="1"/>
         </insert>
     </changeSet>
     <changeSet id="insert test into transaction 3" author="i.grab">
@@ -34,7 +35,7 @@
             <column name="account_from" value="account3"/>
             <column name="account_to" value="account1"/>
             <column name="amount" value="400"/>
-            <column name="account_id" value="44446543-6233-1263-9575-abfcd45d5b65"/>
+            <column name="account_id" value="2"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

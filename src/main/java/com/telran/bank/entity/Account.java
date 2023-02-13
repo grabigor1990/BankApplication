@@ -50,7 +50,7 @@ public class Account {
     @Column(name = "amount_of_many")
     private BigDecimal amountOfMany;
 
-    @ManyToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "transaction_id", referencedColumnName = "id")
     private List<Transaction> transactions;
 

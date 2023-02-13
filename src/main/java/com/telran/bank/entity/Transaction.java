@@ -43,7 +43,7 @@ public class Transaction {
     @Column(name = "amount")
     private BigDecimal amount;
 
-    @ManyToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private List<Account> accounts;
 

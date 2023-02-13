@@ -7,6 +7,7 @@ import com.telran.bank.repository.TransactionRepository;
 import com.telran.bank.service.TransactionService;
 import com.telran.bank.service.exception.TransactionNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     public List<TransactionDTO> getAllTransaction(String date, String city, String sort) {
-        return transactionMapper.toDtoList(transactionsRepository.findAll(date, city, sort));
+        return transactionMapper.toDtoList(transactionsRepository.findAll());
     }
 
     public TransactionDTO createTransaction(TransactionDTO transactionDTO) {
