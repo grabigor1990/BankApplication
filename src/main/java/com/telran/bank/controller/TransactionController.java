@@ -2,6 +2,7 @@ package com.telran.bank.controller;
 
 import com.telran.bank.dto.TransactionDTO;
 import com.telran.bank.service.TransactionService;
+import com.telran.bank.validation.Uuid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -9,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/transactions")
 public class TransactionController {
-
     private final TransactionService transactionsService;
 
     @PostMapping
@@ -23,7 +24,7 @@ public class TransactionController {
     }
 
     @GetMapping("/{id}")
-    public TransactionDTO getTransaction(@PathVariable UUID id) {
+    public TransactionDTO getTransaction(@Uuid @PathVariable UUID id) {
         return transactionsService.getTransaction(id);
     }
 

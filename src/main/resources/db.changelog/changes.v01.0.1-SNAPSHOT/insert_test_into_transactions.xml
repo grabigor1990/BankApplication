@@ -2,40 +2,39 @@
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog">
-
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <changeSet id="insert test into transaction 1" author="i.grab">
         <insert tableName="transactions">
-            <column name="id" value="12345678-7777-7777-1234-1234567890ab"/>
+            <column name="id" value="6fcbfc6e-35bb-4de6-b64f-613ecf1e27c9"/>
             <column name="date_time" value="2023-02-01 10:10:10"/>
             <column name="type" value="WITHDRAW"/>
             <column name="account_from" value="account1"/>
             <column name="account_to" value="account2"/>
             <column name="amount" value="1500"/>
-            <column name="account_id" value="3"/>
+            <column name="account_id" value="a45c8e7d-913f-4d33-9f22-887aa7d60503"/>
         </insert>
     </changeSet>
     <changeSet id="insert test into transaction 2" author="i.grab">
         <insert tableName="transactions">
-            <column name="id" value="523e4567-e89b-12d3-a456-426655440000"/>
+            <column name="id" value="ae503df6-9971-47e8-8f31-2eb310f994fa"/>
             <column name="date_time" value="2023-02-02 11:11:11"/>
             <column name="type" value="TRANSFER"/>
             <column name="account_from" value="account2"/>
             <column name="account_to" value="account3"/>
             <column name="amount" value="800"/>
-            <column name="account_id" value="1"/>
+            <column name="account_id" value="33daa8e7-2d2d-4d44-b49e-2802df4b4d28"/>
         </insert>
     </changeSet>
     <changeSet id="insert test into transaction 3" author="i.grab">
         <insert tableName="transactions">
-            <column name="id" value="aaaabbbb-0000-9999-8888-777766665555"/>
+            <column name="id" value="c9fe8b81-1f3d-4133-a3b8-f8d11dce7e89"/>
             <column name="date_time" value="2023-03-03 12:12:12"/>
             <column name="type" value="DEPOSIT"/>
             <column name="account_from" value="account3"/>
             <column name="account_to" value="account1"/>
             <column name="amount" value="400"/>
-            <column name="account_id" value="2"/>
+            <column name="account_id" value="a45c8e7d-913f-4d33-9f22-887aa7d60503"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

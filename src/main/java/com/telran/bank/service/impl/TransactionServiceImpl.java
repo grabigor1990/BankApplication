@@ -7,19 +7,15 @@ import com.telran.bank.repository.TransactionRepository;
 import com.telran.bank.service.TransactionService;
 import com.telran.bank.service.exception.TransactionNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
-
 @Service
 @RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
-
     private final TransactionRepository transactionsRepository;
-
     private final TransactionMapper transactionMapper;
 
     public TransactionDTO getTransaction(UUID id) {

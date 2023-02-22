@@ -1,17 +1,15 @@
-package com.telran.bank.service.impl;
-
-import com.telran.bank.entity.annotation.UUID;
+package com.telran.bank.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Optional;
 
-public class UuidConstraint implements ConstraintValidator<UUID.Uuid, String> {
 
+public class UuidConstraint implements ConstraintValidator<Uuid, String> {
     private static final String UUID_PATTERN = "^[\\da-fA-F]{8}-[\\da-fA-F]{4}-[\\da-fA-F]{4}-[\\da-fA-F]{4}-[\\da-fA-F]{12}$";
 
     @Override
-    public void initialize(UUID.Uuid constraintAnnotation) {
+    public void initialize(Uuid constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
@@ -23,3 +21,4 @@ public class UuidConstraint implements ConstraintValidator<UUID.Uuid, String> {
                 .orElse(false);
     }
 }
+

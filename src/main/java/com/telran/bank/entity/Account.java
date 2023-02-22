@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -22,9 +21,8 @@ import java.util.UUID;
 public class Account {
 
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "com.telran.bank.generator.UuidTimeSequenceGenerator")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Id
-
     @Column(name = "id")
     private UUID id;
 
@@ -50,10 +48,8 @@ public class Account {
     @Column(name = "amount_of_many")
     private BigDecimal amountOfMany;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "transaction_id", referencedColumnName = "id")
+    @ManyToMany(mappedBy = "accounts", cascade = CascadeType.ALL)
     private List<Transaction> transactions;
-
 
     @Override
     public boolean equals(Object o) {

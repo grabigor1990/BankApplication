@@ -10,7 +10,7 @@ public interface UuidMapper {
         return uuid.toString();
     }
 
-    default UUID toUUID(String uuid) {
+    default UUID fromString(String uuid) {
         return UUID.fromString(uuid);
     }
 }

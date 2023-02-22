@@ -2,12 +2,11 @@
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog"            >
-    
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
     <changeSet id="create sequence for UUID generator" author="i.grab">
         <createSequence sequenceName="sequence_for UUID_generator"
                         schemaName="public"
                         cycle="true"/>
     </changeSet>
 </databaseChangeLog>
-                   

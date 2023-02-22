@@ -2,11 +2,11 @@
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog ">
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="db.changelog/changes.v01.0.1-SNAPSHOT/v0.0.1-master.xml"/>
-    <include file="db.changelog/changes.v01.0.1-SNAPSHOT/create_sequence.xml"/>
-    <include file="db.changelog/changes.v01.0.1-SNAPSHOT/create-tables-chengelog.xml"/>
+<!--    <include file="db.changelog/changes.v01.0.1-SNAPSHOT/create_sequence.xml"/>
+    <include file="db.changelog/changes.v01.0.1-SNAPSHOT/create_tables_changelog.xml"/>
     <include file="db.changelog/changes.v01.0.1-SNAPSHOT/insert_test_into_accounts.xml"/>
-    <include file="db.changelog/changes.v01.0.1-SNAPSHOT/insert_test_into_transactions.xml"/>
+    <include file="db.changelog/changes.v01.0.1-SNAPSHOT/insert_test_into_transactions.xml"/>-->
 </databaseChangeLog>

@@ -12,12 +12,10 @@ spring:
       ddl-auto: none
 
   liquibase:
-    change-log: classpath:/db/changelog/changelog-master.xml
-    enabled: false
-    contexts: dev
+    change-log: classpath:/db.changelog/changelog-master.xml
+    enabled: true
+    drop-first: true
 
 app:
-  description: ${description}
-  version: ${version}
   server:
     url: ${app.server.url}

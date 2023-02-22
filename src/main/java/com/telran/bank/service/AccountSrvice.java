@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface AccountSrvice {
 
-    List<AccountDTO> getAllAccount(String date, List<String> city, String sort);
+    List<AccountDTO> getAllAccount(String date, String city, String sort);
 
     AccountDTO getAccount(UUID id);
 
@@ -17,5 +17,4 @@ public interface AccountSrvice {
     AccountDTO createAccount(AccountDTO accountDTO);
 
     void deleteAccount(UUID id);
-
 }

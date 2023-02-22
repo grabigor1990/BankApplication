@@ -1,7 +1,10 @@
 package com.telran.bank.entity;
 
 import com.telran.bank.entity.enums.TransactionType;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -20,12 +23,10 @@ import java.util.UUID;
 public class Transaction {
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "com.telran.bank.generator.UuidTimeSequenceGenerator")
-
-
+    @GenericGenerator(name = "UUID",
+            strategy = "com.telran.bank.generator.UuidTimeSequenceGenerator")
     @Column(name = "id")
     private UUID id;
-
 
     @Column(name = "date_time")
     private LocalDateTime dateTime = LocalDateTime.now();
@@ -43,25 +44,16 @@ public class Transaction {
     @Column(name = "amount")
     private BigDecimal amount;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @ManyToMany
+    @JoinTable(name = "account_transaction",
+            joinColumns = @JoinColumn(name = "transaction_id"),
+            inverseJoinColumns = @JoinColumn(name = "account_id"))
     private List<Account> accounts;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Transaction that)) return false;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(dateTime, that.dateTime) &&
-                type == that.type &&
-                Objects.equals(accountFrom, that.accountFrom) &&
-                Objects.equals(accountTo, that.accountTo) &&
-                Objects.equals(amount, that.amount);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, dateTime, type, accountFrom, accountTo, amount);
+    public Transaction(TransactionType type, String accountFrom, String accountTo, Double amount) {
+        this.type = type;
+        this.accountFrom = accountFrom;
+        this.accountTo = accountTo;
+        this.amount = BigDecimal.valueOf(amount);
     }
 }
-

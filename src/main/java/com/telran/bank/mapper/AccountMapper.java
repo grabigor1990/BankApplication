@@ -14,5 +14,4 @@ public interface AccountMapper {
     Account dtoToAccount(AccountDTO accountDTO);
 
     List<AccountDTO> toDtoList(List<Account> accounts);
-
 }
