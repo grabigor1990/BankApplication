@@ -36,7 +36,7 @@ public class EntityCreator {
     }
 
     public Transaction getTransaction1(){
-        Transaction transaction1 = new Transaction(WITHDRAW, fromId, toId, amount);
+        Transaction transaction1 = new Transaction();
         transaction1.setId(UUID.randomUUID());
         transaction1.setType(TransactionType.TRANSFER);
         transaction1.setAccountFrom(String.valueOf(getAccount1().getId()));
@@ -46,7 +46,7 @@ public class EntityCreator {
     }
 
     public Transaction getTransaction2(){
-        Transaction transaction2 = new Transaction(WITHDRAW, fromId, toId, amount);
+        Transaction transaction2 = new Transaction();
         transaction2.setId(UUID.randomUUID());
         transaction2.setType(TransactionType.WITHDRAW);
         transaction2.setAccountFrom(String.valueOf(getAccount1().getId()));
@@ -56,7 +56,7 @@ public class EntityCreator {
     }
 
     public Transaction getTransaction3(){
-        Transaction transaction3 = new Transaction(WITHDRAW, fromId, toId, amount);
+        Transaction transaction3 = new Transaction();
         transaction3.setId(UUID.randomUUID());
         transaction3.setType(TransactionType.DEPOSIT);
         transaction3.setAccountFrom(String.valueOf(getAccount2().getId()));

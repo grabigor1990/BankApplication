@@ -60,7 +60,6 @@ class AccountServiceImplTest {
 
         AccountDTO savedAccountDTO = accountService.createAccount(accountDTO);
 
-        assertNotNull(savedAccountDTO);
         assertEquals(accountDTO, savedAccountDTO);
         verify(accountRepository).save(account);
     }
@@ -75,7 +74,6 @@ class AccountServiceImplTest {
 
         AccountDTO foundAccountDTO = accountService.getAccount(accountId);
 
-        assertNotNull(foundAccountDTO);
         assertEquals(accountDTO, foundAccountDTO);
     }
 
@@ -93,7 +91,7 @@ class AccountServiceImplTest {
         AccountDTO updatedAccountDTO = DtoCreator.createDefaultAccountDto();
         Account updatedAccount = EntityCreator.getAccount1();
 
-        when(accountRepository.findById(accountId)).thenReturn(Optional.of(account));
+        when(accountRepository.findById(accountId)).thenReturn(Optional.of(updatedAccount));
         when(accountMapper.dtoToAccount(updatedAccountDTO)).thenReturn(updatedAccount);
         when(accountRepository.save(updatedAccount)).thenReturn(updatedAccount);
 
