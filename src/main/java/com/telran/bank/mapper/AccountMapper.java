@@ -3,6 +3,7 @@ package com.telran.bank.mapper;
 import com.telran.bank.dto.AccountDTO;
 import com.telran.bank.entity.Account;
 import org.mapstruct.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 

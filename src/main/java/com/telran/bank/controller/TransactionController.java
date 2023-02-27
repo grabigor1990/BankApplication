@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 
 @RequiredArgsConstructor
@@ -24,15 +23,14 @@ public class TransactionController {
     }
 
     @GetMapping("/{id}")
-    public TransactionDTO getTransaction(@Uuid @PathVariable UUID id) {
+    public TransactionDTO getTransaction(@Uuid @PathVariable Long id) {
         return transactionsService.getTransaction(id);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<TransactionDTO> getAllTransactions(@RequestParam(required = false) String date,
-                                                   @RequestParam(required = false) String type,
-                                                   @RequestParam(required = false) String sort) {
-        return transactionsService.getAllTransaction(date, type, sort);
+                                                   @RequestParam(required = false) String type) {
+        return transactionsService.getAllTransaction(date, type);
     }
 }

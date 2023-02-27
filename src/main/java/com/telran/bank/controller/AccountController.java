@@ -2,12 +2,13 @@ package com.telran.bank.controller;
 
 import com.telran.bank.dto.AccountDTO;
 import com.telran.bank.entity.Account;
-import com.telran.bank.service.AccountSrvice;
+import com.telran.bank.service.AccountService;
 import com.telran.bank.validation.Uuid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,7 +16,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RequestMapping("/accounts")
 public class AccountController {
-    private final AccountSrvice accountService;
+    private final AccountService accountService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -25,9 +26,8 @@ public class AccountController {
 
     @GetMapping
     public List<AccountDTO> getAllAccounts(@RequestParam(value = "date", required = false) String date,
-                                           @RequestParam(value = "city", required = false) String city,
-                                           @RequestParam(value = "sort", required = false) String sort) {
-        return accountService.getAllAccount(date, city, sort);
+                                           @RequestParam(value = "city", required = false) String city) {
+        return accountService.getAllAccount(date, city);
     }
 
     @GetMapping("/{id}")
@@ -45,5 +45,13 @@ public class AccountController {
     @ResponseStatus(HttpStatus.OK)
     public void deleteAccount(@Uuid @PathVariable UUID id) {
         accountService.deleteAccount(id);
+    }
+
+    @PutMapping("/accounts/transfer")
+    @ResponseStatus(HttpStatus.OK)
+    public void transferMoney(@Uuid @RequestParam(value = "fromId", required = false) Account fromId,
+                              @Uuid @RequestParam(value = "toId", required = false) Account toId,
+                              @RequestParam(value = "amount", required = false) BigDecimal amount) {
+        accountService.transfer(fromId, toId, amount);
     }
 }

@@ -4,9 +4,10 @@ import com.telran.bank.dto.AccountDTO;
 import com.telran.bank.entity.Account;
 import com.telran.bank.mapper.AccountMapper;
 import com.telran.bank.repository.AccountRepository;
-import com.telran.bank.service.exception.AccountNotFoundException;
+import com.telran.bank.exception.AccountNotFoundException;
 import com.telran.bank.util.DtoCreator;
 import com.telran.bank.util.EntityCreator;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,17 +40,24 @@ class AccountServiceImplTest {
     @Test
     @DisplayName("Get all accounts should return a list of AccountDTOs")
     void testGetAllAccounts() {
-        account = EntityCreator.getAccount1();
-        accountDTO = DtoCreator.createDefaultAccountDto();
-        List<Account> accounts = Arrays.asList(EntityCreator.getAccount1(), EntityCreator.getAccount2());
+        Account account1 = EntityCreator.getAccount1();
+        Account account2 = EntityCreator.getAccount2();
+        AccountDTO accountDTO1 = DtoCreator.createAccountDto1();
+        AccountDTO accountDTO2 = DtoCreator.createAccountDto2();
 
-        when(accountRepository.findAll()).thenReturn(accounts);
-        when(accountMapper.toDtoList(Collections.singletonList(account))).thenReturn(Collections.singletonList(accountDTO));
+        when(accountRepository.findAll()).thenReturn(Arrays.asList(account1, account2));
+        when(accountRepository.findAllByDateOrCity(LocalDate.parse("2022-03-01"), "New York")).thenReturn(Collections.singletonList(account1));
+        when(accountMapper.toDtoList(Arrays.asList(account1, account2))).thenReturn(Arrays.asList(accountDTO1, accountDTO2));
+        when(accountMapper.toDtoList(Collections.singletonList(account1))).thenReturn(Collections.singletonList(accountDTO1));
 
-        List<AccountDTO> accountDTOs = accountService.getAllAccount(null, null, null);
+        List<AccountDTO> allAccounts = accountService.getAllAccount(null, null);
+        Assertions.assertEquals(2, allAccounts.size());
+        Assertions.assertEquals(accountDTO1, allAccounts.get(0));
+        Assertions.assertEquals(accountDTO2, allAccounts.get(1));
 
-        assertEquals(1, accountDTOs.size());
-        assertEquals(accountDTO, accountDTOs.get(0));
+        List<AccountDTO> filteredAccounts = accountService.getAllAccount("2022-03-01", "New York");
+        Assertions.assertEquals(1, filteredAccounts.size());
+        Assertions.assertEquals(accountDTO1, filteredAccounts.get(0));
     }
 
     @Test
@@ -88,11 +97,10 @@ class AccountServiceImplTest {
     @Test
     @DisplayName("Update account should update and return an Account")
     void testUpdateAccount() {
-        AccountDTO updatedAccountDTO = DtoCreator.createDefaultAccountDto();
+        AccountDTO updatedAccountDTO = DtoCreator.createAccountDto1();
         Account updatedAccount = EntityCreator.getAccount1();
 
         when(accountRepository.findById(accountId)).thenReturn(Optional.of(updatedAccount));
-        when(accountMapper.dtoToAccount(updatedAccountDTO)).thenReturn(updatedAccount);
         when(accountRepository.save(updatedAccount)).thenReturn(updatedAccount);
 
         Account savedAccount = accountService.updateAccount(accountId, updatedAccountDTO);
@@ -107,7 +115,7 @@ class AccountServiceImplTest {
     @DisplayName("Update account should throw an AccountNotFoundException for a non-existing account")
     void testUpdateAccountNotFound() {
         UUID nonExistingAccountId = UUID.randomUUID();
-        AccountDTO updatedAccountDTO = DtoCreator.createDefaultAccountDto();
+        AccountDTO updatedAccountDTO = DtoCreator.createAccountDto1();
 
         when(accountRepository.findById(nonExistingAccountId)).thenReturn(Optional.empty());
 

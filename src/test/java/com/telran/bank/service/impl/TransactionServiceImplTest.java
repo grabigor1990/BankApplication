@@ -54,9 +54,6 @@ class TransactionServiceImplTest {
         assertEquals(transactionDTO.getId(), result.getId());
         assertEquals(transactionDTO.getAmount(), result.getAmount());
         assertEquals(transactionDTO.getType(), result.getType());
-
-        when(transactionRepository.findById(transaction.getId())).thenReturn(Optional.empty());
-        transactionService.getTransaction(transaction.getId());
     }
 
     @Test
@@ -72,7 +69,7 @@ class TransactionServiceImplTest {
         when(transactionRepository.findAll()).thenReturn(transactions);
         when(transactionMapper.toDtoList(transactions)).thenReturn(transactionDTOs);
 
-        List<TransactionDTO> result = transactionService.getAllTransaction(null, null, null);
+        List<TransactionDTO> result = transactionService.getAllTransaction(null, null);
 
         assertEquals(2, result.size());
         assertEquals(transactionDTO1, result.get(0));

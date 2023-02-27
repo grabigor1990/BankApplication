@@ -1,4 +1,4 @@
-package com.telran.bank.service.exception;
+package com.telran.bank.exception;
 
 public class AccountNotFoundException extends RuntimeException {
     public AccountNotFoundException(String message) {

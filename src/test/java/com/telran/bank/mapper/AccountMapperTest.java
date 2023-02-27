@@ -4,23 +4,18 @@ import com.telran.bank.dto.AccountDTO;
 import com.telran.bank.entity.Account;
 import com.telran.bank.util.DtoCreator;
 import com.telran.bank.util.EntityCreator;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
- class AccountMapperTest {
 
-    @Mock
-    private AccountMapper accountMapper;
+class AccountMapperTest {
 
     @Mock
     private Account account;
@@ -28,42 +23,52 @@ import static org.mockito.Mockito.when;
     @Mock
     private AccountDTO accountDTO;
 
+    private final AccountMapper accountMapper = new AccountMapperImpl();
+
+
     @BeforeEach
     void setUp() {
         account = EntityCreator.getAccount1();
-        accountDTO = DtoCreator.createDefaultAccountDto();
+        accountDTO = DtoCreator.createAccountDto1();
     }
 
     @Test
     void testAccountToDto() {
-        when(accountMapper.accountToDto(account)).thenReturn(accountDTO);
+        assertEquals(accountDTO.getId(), account.getId().toString());
+        assertEquals(accountDTO.getCreatedAccount(), account.getCreatedAccount().toString());
+        assertEquals(accountDTO.getEmail(), account.getEmail());
+        assertEquals(accountDTO.getFirstName(), account.getFirstName());
+        assertEquals(accountDTO.getLastName(), account.getLastName());
 
-        AccountDTO result = accountMapper.accountToDto(account);
-
-        assertEquals(result, accountDTO);
     }
 
     @Test
     void testDtoToAccount() {
-        when(accountMapper.dtoToAccount(accountDTO)).thenReturn(account);
-
-        Account result = accountMapper.dtoToAccount(accountDTO);
-
-        assertEquals(result, account);
+        assertEquals(account.getId().toString(), accountDTO.getId());
+        assertEquals(account.getCreatedAccount().toString(), accountDTO.getCreatedAccount());
+        assertEquals(accountDTO.getEmail(), account.getEmail());
+        assertEquals(accountDTO.getFirstName(), account.getFirstName());
+        assertEquals(accountDTO.getLastName(), account.getLastName());
     }
 
     @Test
     void testToDtoList() {
-        List<Account> accounts = new ArrayList<>();
-        accounts.add(account);
+        Account account1 = EntityCreator.getAccount1();
+        Account account2 = EntityCreator.getAccount2();
 
-        List<AccountDTO> expected = new ArrayList<>();
-        expected.add(accountDTO);
+        List<Account> accountList1 = new ArrayList<>();
 
-        when(accountMapper.toDtoList(accounts)).thenReturn(expected);
+        accountList1.add(account1);
+        accountList1.add(account2);
 
-        List<AccountDTO> result = accountMapper.toDtoList(accounts);
+        List<AccountDTO> accountDTOList1 = accountMapper.toDtoList(accountList1);
 
-        assertEquals(result, expected);
+        Assertions.assertEquals(2, accountDTOList1.size());
+        Assertions.assertEquals(account1.getFirstName(), accountDTOList1.get(0).getFirstName());
+        Assertions.assertEquals(account1.getLastName(), accountDTOList1.get(0).getLastName());
+        Assertions.assertEquals(account1.getEmail(), accountDTOList1.get(0).getEmail());
+        Assertions.assertEquals(account2.getFirstName(), accountDTOList1.get(1).getFirstName());
+        Assertions.assertEquals(account2.getLastName(), accountDTOList1.get(1).getLastName());
+        Assertions.assertEquals(account2.getEmail(), accountDTOList1.get(1).getEmail());
     }
 }

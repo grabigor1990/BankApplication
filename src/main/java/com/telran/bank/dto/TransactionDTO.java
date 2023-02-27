@@ -16,6 +16,6 @@ public class TransactionDTO {
     String accountFrom;
     String accountTo;
     String amount;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     String dateTime;
 }

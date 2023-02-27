@@ -6,7 +6,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -26,12 +26,12 @@ public class Account {
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "email")
-    private String email;
-
     @CreatedDate
     @Column(name = "created_account")
-    private LocalDateTime createdAccount = LocalDateTime.now();
+    private LocalDate createdAccount = LocalDate.now();
+
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "first_name")
     private String firstName;
@@ -50,16 +50,4 @@ public class Account {
 
     @ManyToMany(mappedBy = "accounts", cascade = CascadeType.ALL)
     private List<Transaction> transactions;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Account account)) return false;
-        return id.equals(account.id) && email.equals(account.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, email);
-    }
 }

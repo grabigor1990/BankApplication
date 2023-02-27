@@ -15,10 +15,9 @@ public class AccountDTO {
 
     @Uuid
     String id;
-    String email;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     String createdAccount;
-    @JsonFormat()
+    String email;
     String firstName;
     String lastName;
     String country;

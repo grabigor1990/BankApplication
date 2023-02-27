@@ -18,7 +18,7 @@ public class TransactionConverter implements AttributeConverter<TransactionType,
     @Override
     public TransactionType convertToEntityAttribute(String attribute) {
         if (attribute != null)
-            return TransactionType.valueOf(attribute);
+            return TransactionType.findByType(attribute);
         else
             return null;
     }

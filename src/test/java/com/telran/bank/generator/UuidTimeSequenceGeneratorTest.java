@@ -3,6 +3,7 @@ package com.telran.bank.generator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,13 +24,14 @@ class UuidTimeSequenceGeneratorTest {
     @Mock
     private JdbcTemplate jdbcTemplate;
 
-    @Mock
+    @InjectMocks
     private UuidTimeSequenceGenerator generator;
 
 
     @DisplayName("Must generate valid UUID value")
     @Test
     void generateOneUuidValue() {
+
         when(jdbcTemplate.queryForObject(anyString(), (RowMapper<Object>) any()))
                 .thenReturn((long) (Math.random() * 1000000));
 

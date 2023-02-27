@@ -1,4 +1,4 @@
-package com.telran.bank.service.exception;
+package com.telran.bank.exception;
 
 public class TransactionNotFoundException extends RuntimeException {
     public TransactionNotFoundException(String message) {

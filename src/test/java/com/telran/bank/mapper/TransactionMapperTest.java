@@ -6,79 +6,75 @@ import com.telran.bank.util.DtoCreator;
 import com.telran.bank.util.EntityCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@ExtendWith(MockitoExtension.class)
 class TransactionMapperTest {
 
     @Mock
-    private TransactionMapper transactionMapper;
+    Transaction transaction;
 
     @Mock
-    private Transaction transaction1;
-    private Transaction transaction2;
+    TransactionDTO transactionDTO;
 
-    @Mock
-    private TransactionDTO transactionDTO;
+    private final TransactionMapper mapper = new TransactionMapperImpl();
 
     @BeforeEach
     void setUp() {
-         transaction1 = EntityCreator.getTransaction1();
-         transaction2 = EntityCreator.getTransaction2();
-         transactionDTO = DtoCreator.createDefaultTransactionDto();
-    }
-    @Test
-    void transactionToDto() {
-        TransactionDTO transactionDto = transactionMapper.transactionToDto(transaction1);
-
-        assertNotNull(transactionDto);
-        assertEquals(transaction1.getId().toString(), transactionDto.getId());
-        assertEquals(new BigDecimal("100.00").toString(), transactionDto.getAmount());
-        assertEquals(LocalDateTime.of(2022, 1, 1,18,20,11).toString(), transactionDto.getDateTime());
+        transaction = EntityCreator.getTransaction1();
+        transactionDTO = DtoCreator.createTransactionDto1();
     }
 
     @Test
-    void dtoToTransaction() {
-        Transaction transaction = transactionMapper.dtoToTransaction(transactionDTO);
-
-        assertNotNull(transaction);
-        assertEquals(transaction2.getId(), transaction.getId());
-        assertEquals(new BigDecimal("200.00"), transaction.getAmount());
-        assertEquals(LocalDateTime.of(2022, 2, 1,22,15,10), transaction.getDateTime());
+    void testTransactionToDto() {
+        assertEquals(transaction.getId().toString(), transactionDTO.getId());
+        assertEquals(transaction.getType().toString(), transactionDTO.getType());
+        assertEquals(transaction.getAccountFrom(), transactionDTO.getAccountFrom());
+        assertEquals(transaction.getAccountTo(), transactionDTO.getAccountTo());
+        assertEquals(transaction.getAmount().toString(), transactionDTO.getAmount());
+        assertEquals(transaction.getDateTime().toString(), transactionDTO.getDateTime());
     }
 
     @Test
-    void toDtoList() {
+    void testDtoToTransaction() {
+        assertEquals(transactionDTO.getId(), transaction.getId().toString());
+        assertEquals(transactionDTO.getType(), transaction.getType().toString());
+        assertEquals(transactionDTO.getAccountFrom(), transaction.getAccountFrom());
+        assertEquals(transactionDTO.getAccountTo(), transaction.getAccountTo());
+        assertEquals(transactionDTO.getAmount(), transaction.getAmount().toString());
+        assertEquals(transactionDTO.getDateTime(), transaction.getDateTime().toString());
+    }
+
+    @Test
+    void testToDtoList() {
+        Transaction t1 = EntityCreator.getTransaction1();
+        Transaction t2 = EntityCreator.getTransaction2();
 
         List<Transaction> transactions = new ArrayList<>();
-        transactions.add(transaction1);
-        transactions.add(transaction2);
+        transactions.add(t1);
+        transactions.add(t2);
 
-        List<TransactionDTO> dtos = transactionMapper.toDtoList(transactions);
+        List<TransactionDTO> dtos = mapper.toDtoList(transactions);
 
-        assertNotNull(dtos);
         assertEquals(2, dtos.size());
 
         TransactionDTO dto1 = dtos.get(0);
         assertNotNull(dto1);
-        assertEquals(transaction1.getId().toString(), dto1.getId());
-        assertEquals(new BigDecimal("100.00").toString(), dto1.getAmount());
-        assertEquals(LocalDateTime.of(2022, 1, 1,18,20,11).toString(), dto1.getDateTime());
+
+        assertEquals(new BigDecimal("123400.0").toString(), dto1.getAmount());
+        assertEquals(LocalDate.of(2023, 3, 3).toString(), dto1.getDateTime());
 
         TransactionDTO dto2 = dtos.get(1);
         assertNotNull(dto2);
-        assertEquals(transaction2.getId().toString(), dto2.getId());
-        assertEquals(new BigDecimal("200.00").toString(), dto2.getAmount());
-        assertEquals(LocalDateTime.of(2022, 2, 1,22,15,10).toString(), dto2.getDateTime());
+        assertEquals(t2.getId().toString(), dto2.getId());
+        assertEquals(new BigDecimal("100.0").toString(), dto2.getAmount());
+        assertEquals(LocalDate.of(2023, 4, 4).toString(), dto2.getDateTime());
     }
 }
