@@ -16,7 +16,7 @@ class TransactionConverterTest {
     }
 
     @Test
-    public void shouldReturnTransactionTypeNameWhenConvertToDatabaseColumn() {
+    void shouldReturnTransactionTypeNameWhenConvertToDatabaseColumn() {
         TransactionType transactionType = TransactionType.DEPOSIT;
         String expected = transactionType.name();
         String actual = transactionConverter.convertToDatabaseColumn(transactionType);
@@ -24,7 +24,7 @@ class TransactionConverterTest {
     }
 
     @Test
-    public void shouldReturnNullWhenConvertToDatabaseColumnAndTransactionTypeIsNull() {
+    void shouldReturnNullWhenConvertToDatabaseColumnAndTransactionTypeIsNull() {
         TransactionType transactionType = null;
         String expected = null;
         String actual = transactionConverter.convertToDatabaseColumn(transactionType);
@@ -32,7 +32,7 @@ class TransactionConverterTest {
     }
 
     @Test
-    public void shouldReturnTransactionTypeWhenConvertToEntityAttribute() {
+    void shouldReturnTransactionTypeWhenConvertToEntityAttribute() {
         String attribute = "DEPOSIT";
         TransactionType expected = TransactionType.findByType(attribute);
         TransactionType actual = transactionConverter.convertToEntityAttribute(attribute);
@@ -40,7 +40,7 @@ class TransactionConverterTest {
     }
 
     @Test
-    public void shouldReturnNullWhenConvertToEntityAttributeAndAttributeIsNull() {
+    void shouldReturnNullWhenConvertToEntityAttributeAndAttributeIsNull() {
         String attribute = null;
         TransactionType expected = null;
         TransactionType actual = transactionConverter.convertToEntityAttribute(attribute);

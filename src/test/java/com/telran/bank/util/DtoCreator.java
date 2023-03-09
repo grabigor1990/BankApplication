@@ -34,6 +34,7 @@ public class DtoCreator {
                 "2023-03-03"
         );
     }
+
     public static TransactionDTO createTransactionDto2() {
         return getTransactionDTO(
                 "5",
@@ -46,9 +47,9 @@ public class DtoCreator {
     }
 
     public static AccountDTO getAccountDTO(
-            String id, String createdAccount, String email,String firstName, String lastName, String country, String city,
+            String id, String createdAccount, String email, String firstName, String lastName, String country, String city,
             String amountOfMany) {
-        return new AccountDTO(id,createdAccount,email, firstName, lastName, country, city, amountOfMany);
+        return new AccountDTO(id, createdAccount, email, firstName, lastName, country, city, amountOfMany);
     }
 
     public static AccountDTO createAccountDto1() {
@@ -62,10 +63,11 @@ public class DtoCreator {
                 "New York",
                 "1000.00");
     }
+
     public static AccountDTO createAccountDto2() {
         return getAccountDTO(
                 "12d72b50-1c7b-4f45-9bc1-ea9e9a95c8d5",
-                "2020-02-02",
+                "2021-05-04",
                 "does.doe@example.com",
                 "Anna",
                 "Does",

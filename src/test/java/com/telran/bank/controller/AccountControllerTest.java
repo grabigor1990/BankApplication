@@ -4,14 +4,12 @@ import com.telran.bank.dto.AccountDTO;
 import com.telran.bank.entity.Account;
 import com.telran.bank.service.AccountService;
 import com.telran.bank.util.DtoCreator;
-import com.telran.bank.util.EntityCreator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -91,19 +89,4 @@ class AccountControllerTest {
 
         verify(accountService, times(1)).deleteAccount(id);
     }
-
-   /* @Test
-    void testTransferMoney() {
-        UUID fromId = UUID.randomUUID();
-        UUID toId = UUID.randomUUID();
-        BigDecimal amount = new BigDecimal(100);
-        Account fromAccount = new Account();
-        Account toAccount = new Account();
-
-        doNothing().when(accountService).transfer(fromAccount, toAccount, amount);
-
-        accountController.transferMoney(fromId, toId, amount);
-
-        verify(accountService, times(1)).transfer(fromAccount, toAccount, amount);
-    }*/
 }

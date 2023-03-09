@@ -14,17 +14,11 @@ import java.util.UUID;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
-
     void deleteById(UUID id);
 
-    @Override
+    Optional<Account> findById(UUID id);
 
-    Account save(Account account);
+    List<Account> findAllByCreatedAccount(LocalDate parse);
 
-    Optional<Object> findById(UUID id);
-
-    @Override
-    List<Account>findAll();
-
-    List<Account> findAllByDateOrCity(LocalDate parse, String city);
+    List<Account> findAllByCity(String city);
 }

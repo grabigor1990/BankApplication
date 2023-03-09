@@ -60,20 +60,4 @@ public class EntityCreator {
         transaction2.setDateTime(LocalDate.parse("2023-04-04"));
         return transaction2;
     }
-
-    public Transaction getTransaction3() {
-        Transaction transaction3 = new Transaction();
-        transaction3.setId(6L);
-        transaction3.setType(DEPOSIT);
-        transaction3.setAccountFrom(String.valueOf(getAccount2().getId()));
-        transaction3.setAccountTo(String.valueOf(getAccount2().getId()));
-        transaction3.setAmount(BigDecimal.valueOf(200.00));
-        return transaction3;
-    }
-
-    public static final Transaction trans1 = new Transaction(TRANSFER, getAccount1().getId().toString(), getAccount2().getId().toString(), 26.0);
-
-    public static final Transaction trans2 = new Transaction(WITHDRAW, getAccount1().getId().toString(), getAccount1().getId().toString(), 100.11);
-
-    public static final Transaction trans3 = new Transaction(DEPOSIT, getAccount2().getId().toString(), getAccount2().getId().toString(), 200.22);
 }

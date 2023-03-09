@@ -40,29 +40,52 @@ class AccountServiceImplTest {
     @Test
     @DisplayName("Get all accounts should return a list of AccountDTOs")
     void testGetAllAccounts() {
+        List<Account> accounts = Arrays.asList(EntityCreator.getAccount1(), EntityCreator.getAccount2());
         Account account1 = EntityCreator.getAccount1();
         Account account2 = EntityCreator.getAccount2();
         AccountDTO accountDTO1 = DtoCreator.createAccountDto1();
         AccountDTO accountDTO2 = DtoCreator.createAccountDto2();
 
         when(accountRepository.findAll()).thenReturn(Arrays.asList(account1, account2));
-        when(accountRepository.findAllByDateOrCity(LocalDate.parse("2022-03-01"), "New York")).thenReturn(Collections.singletonList(account1));
+        when(accountRepository.findAllByCreatedAccount(LocalDate.parse("2021-05-05"))).thenReturn(accounts);
+        when(accountRepository.findAllByCity("New York")).thenReturn(accounts);
         when(accountMapper.toDtoList(Arrays.asList(account1, account2))).thenReturn(Arrays.asList(accountDTO1, accountDTO2));
-        when(accountMapper.toDtoList(Collections.singletonList(account1))).thenReturn(Collections.singletonList(accountDTO1));
 
         List<AccountDTO> allAccounts = accountService.getAllAccount(null, null);
         Assertions.assertEquals(2, allAccounts.size());
         Assertions.assertEquals(accountDTO1, allAccounts.get(0));
         Assertions.assertEquals(accountDTO2, allAccounts.get(1));
 
-        List<AccountDTO> filteredAccounts = accountService.getAllAccount("2022-03-01", "New York");
-        Assertions.assertEquals(1, filteredAccounts.size());
+        List<AccountDTO> filteredAccounts = accountService.getAllAccount("2021-05-05", "New York");
+        Assertions.assertEquals(2, filteredAccounts.size());
         Assertions.assertEquals(accountDTO1, filteredAccounts.get(0));
+    }
+
+    @Test
+    public void testGetAllAccountWithNullParameters() {
+        List<Account> accounts = Arrays.asList(EntityCreator.getAccount1(), EntityCreator.getAccount2());
+        Account account1 = EntityCreator.getAccount1();
+        Account account2 = EntityCreator.getAccount2();
+        AccountDTO accountDTO1 = DtoCreator.createAccountDto1();
+        AccountDTO accountDTO2 = DtoCreator.createAccountDto2();
+
+        when(accountRepository.findAll()).thenReturn(accounts);
+        when(accountMapper.toDtoList(Arrays.asList(account1, account2))).thenReturn(Arrays.asList(accountDTO1, accountDTO2));
+
+        List<AccountDTO> allAccounts = accountService.getAllAccount(null, null);
+        assertEquals(accounts.size(), allAccounts.size());
+        for (int i = 0; i < accounts.size(); i++) {
+            assertEquals(accounts.get(i).getCity(), allAccounts.get(i).getCity());
+            assertEquals(accounts.get(i).getCreatedAccount().toString(), allAccounts.get(i).getCreatedAccount().toString());
+            assertEquals(accounts.get(i).getFirstName(), allAccounts.get(i).getFirstName());
+            assertEquals(accounts.get(i).getLastName(), allAccounts.get(i).getLastName());
+        }
     }
 
     @Test
     @DisplayName("Create account should save and return an AccountDTO")
     void testCreateAccount() {
+        account = EntityCreator.getAccount1();
         when(accountMapper.dtoToAccount(accountDTO)).thenReturn(account);
         when(accountRepository.save(account)).thenReturn(account);
         when(accountMapper.accountToDto(account)).thenReturn(accountDTO);

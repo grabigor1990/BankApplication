@@ -1,6 +1,7 @@
 package com.telran.bank.entity;
 
 import lombok.*;
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -28,7 +29,7 @@ public class Account {
 
     @CreatedDate
     @Column(name = "created_account")
-    private LocalDate createdAccount = LocalDate.now();
+    private LocalDate createdAccount;
 
     @Column(name = "email")
     private String email;
@@ -50,4 +51,32 @@ public class Account {
 
     @ManyToMany(mappedBy = "accounts", cascade = CascadeType.ALL)
     private List<Transaction> transactions;
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", createdAccount=" + createdAccount +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", amountOfMany=" + amountOfMany +
+                ", transactions=" + transactions +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Account account = (Account) o;
+        return getId() != null && Objects.equals(getId(), account.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

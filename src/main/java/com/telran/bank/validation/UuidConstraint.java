@@ -21,4 +21,3 @@ public class UuidConstraint implements ConstraintValidator<Uuid, String> {
                 .orElse(false);
     }
 }
-

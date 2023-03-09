@@ -36,7 +36,7 @@
             <column name="created_account" value="2023-01-03 12:00:13"/>
             <column name="email" value="sohn@gmail.com"/>
             <column name="first_name" value="Andreas"/>
-            <column name="last_name" value="Sohn"/>
+            <column name="last_name" value="Shon"/>
             <column name="city" value="Dortmund"/>
             <column name="country" value="Germany"/>
             <column name="amount_of_many" value="7200"/>

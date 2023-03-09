@@ -33,21 +33,25 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<AccountDTO> getAllAccount(String date, String city) {
-        if (date != null || city != null) {
-            return accountMapper.toDtoList(accountRepository.findAllByDateOrCity(LocalDate.parse(date), city));
+        List<Account> accounts = accountRepository.findAll();
+        if (date != null) {
+            accounts = accountRepository.findAllByCreatedAccount(LocalDate.parse(date));
         }
-        return accountMapper.toDtoList(accountRepository.findAll());
+        if (city != null) {
+            accounts = accountRepository.findAllByCity(city);
+        }
+        return accountMapper.toDtoList(accounts);
     }
 
     @Override
     public AccountDTO getAccount(UUID id) {
-        var account = (Account) accountRepository.findById(id).orElseThrow(() -> new AccountNotFoundException("Account not found"));
+        var account = accountRepository.findById(id).orElseThrow(() -> new AccountNotFoundException("Account not found"));
         return accountMapper.accountToDto(account);
     }
 
     @Override
     public Account updateAccount(UUID id, AccountDTO accountDTO) {
-        Account existingAccount = (Account) accountRepository.findById(id)
+        Account existingAccount = accountRepository.findById(id)
                 .orElseThrow(() -> new AccountNotFoundException("Account with id " + id + " not found"));
         existingAccount.setEmail(accountDTO.getEmail());
         existingAccount.setFirstName(accountDTO.getFirstName());
@@ -66,10 +70,9 @@ public class AccountServiceImpl implements AccountService {
         Transaction transactionFrom = new Transaction();
         Transaction transactionTo = new Transaction();
 
-        //transactionFrom.setAccount(from);
         from.getTransactions().add(transactionFrom);
         to.getTransactions().add(transactionTo);
-        //transactionTo.setAccount(to);
+
         transactionRepository.save(transactionFrom);
         transactionRepository.save(transactionTo);
 
